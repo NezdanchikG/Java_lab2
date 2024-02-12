@@ -2,9 +2,10 @@ package org.example;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class MyArrayList<E> implements MyList<E> {
+public class MyArrayList<E> implements MyList<E>, Iterable<E> {
 
     private final int DEFAULT_CAPACITY = 10;
     private int size;
@@ -40,8 +41,12 @@ public class MyArrayList<E> implements MyList<E> {
             @Override
             @SuppressWarnings("unchecked")
             public E next() {
+                if (index >= size) {
+                    throw new NoSuchElementException();
+                }
                 return (E) array[index++];
             }
+
         };
     }
 
